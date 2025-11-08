@@ -118,19 +118,7 @@ const Portfolio = () => {
             ))}
           </TabsList>
 
-          {/* Active Category Label */}
-          <div className="text-center text-base sm:text-lg font-medium mb-6 sm:mb-8 text-primary capitalize px-3 break-words">
-            Currently Viewing:{" "}
-            <span className="font-semibold block sm:inline mt-1 sm:mt-0">
-              {activeTab === "banners"
-                ? "Banner Art"
-                : activeTab === "models"
-                ? "2D Models"
-                : activeTab === "pfps"
-                ? "PFP Art"
-                : "Reference Sheets"}
-            </span>
-          </div>
+        
 
           {/* Portfolio Content */}
           <TabsContent value="banners" className="mt-8">
