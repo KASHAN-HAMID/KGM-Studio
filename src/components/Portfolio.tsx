@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Card } from "@/components/ui/card";
 
-// Import portfolio images (renamed)
+// Import portfolio images
 import img1 from "@/assets/1.jpg";
 import img2 from "@/assets/2.jpg";
 import img3 from "@/assets/3.jpg";
@@ -44,19 +44,12 @@ const portfolioData = {
   ],
 };
 
-const categoryNames: Record<string, string> = {
-  banners: "Banner Art",
-  models: "2D Models",
-  pfps: "PFP Art",
-  references: "Reference Sheets",
-};
-
 const Portfolio = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<string>("banners");
+  const [activeTab, setActiveTab] = useState("banners");
 
   const PortfolioGrid = ({ items }: { items: typeof portfolioData.banners }) => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {items.map((item, index) => (
         <Card
           key={item.id}
@@ -86,7 +79,7 @@ const Portfolio = () => {
       <div className="absolute inset-0 opacity-20" style={{ background: "var(--gradient-radial)" }} />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
+        {/* Header */}
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
             Portfolio
@@ -98,26 +91,48 @@ const Portfolio = () => {
         </div>
 
         {/* Tabs Section */}
-        <Tabs defaultValue="banners" value={activeTab} onValueChange={setActiveTab} className="w-full">
-          {/* Tabs List */}
-          <TabsList className="flex flex-wrap justify-center gap-3 w-full max-w-2xl mx-auto mb-10 bg-card/50 backdrop-blur rounded-xl p-2">
-            <TabsTrigger value="banners" className="px-3 py-2 text-sm sm:text-base">Banner Art</TabsTrigger>
-            <TabsTrigger value="models" className="px-3 py-2 text-sm sm:text-base">2D Models</TabsTrigger>
-            <TabsTrigger value="pfps" className="px-3 py-2 text-sm sm:text-base">PFP Art</TabsTrigger>
-            <TabsTrigger value="references" className="px-3 py-2 text-sm sm:text-base">Reference Sheets</TabsTrigger>
+        <Tabs
+          defaultValue="banners"
+          className="w-full"
+          onValueChange={(val) => setActiveTab(val)}
+        >
+          {/* Responsive Tabs List */}
+          <TabsList className="flex flex-wrap justify-center gap-3 p-3 bg-card/50 backdrop-blur rounded-xl max-w-2xl mx-auto mb-10 sm:mb-12">
+            {[
+              { value: "banners", label: "Banner Art" },
+              { value: "models", label: "2D Models" },
+              { value: "pfps", label: "PFP Art" },
+              { value: "references", label: "Reference Sheets" },
+            ].map((tab) => (
+              <TabsTrigger
+                key={tab.value}
+                value={tab.value}
+                className={`text-sm md:text-base px-4 py-2 rounded-xl border transition-all duration-300 whitespace-nowrap ${
+                  activeTab === tab.value
+                    ? "bg-primary text-primary-foreground border-primary shadow-md scale-105"
+                    : "bg-background/50 border-border hover:border-primary/40"
+                }`}
+              >
+                {tab.label}
+              </TabsTrigger>
+            ))}
           </TabsList>
 
-          {/* Current category label with gradient */}
-          <div className="text-center mb-10 animate-fade-in-up">
-            <p className="text-base sm:text-lg text-muted-foreground">
-              Currently viewing:{" "}
-              <span className="font-semibold bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent animate-gradient-x">
-                {categoryNames[activeTab]}
-              </span>
-            </p>
+          {/* Active Category Label */}
+          <div className="text-center text-base sm:text-lg font-medium mb-6 sm:mb-8 text-primary capitalize px-3 break-words">
+            Currently Viewing:{" "}
+            <span className="font-semibold block sm:inline mt-1 sm:mt-0">
+              {activeTab === "banners"
+                ? "Banner Art"
+                : activeTab === "models"
+                ? "2D Models"
+                : activeTab === "pfps"
+                ? "PFP Art"
+                : "Reference Sheets"}
+            </span>
           </div>
 
-          {/* Portfolio Grid per Category */}
+          {/* Portfolio Content */}
           <TabsContent value="banners" className="mt-8">
             <PortfolioGrid items={portfolioData.banners} />
           </TabsContent>
