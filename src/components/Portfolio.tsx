@@ -97,26 +97,28 @@ const Portfolio = () => {
           onValueChange={(val) => setActiveTab(val)}
         >
           {/* Responsive Tabs List */}
-          <TabsList className="flex flex-wrap justify-center gap-3 p-3 bg-card/50 backdrop-blur rounded-xl max-w-2xl mx-auto mb-10 sm:mb-12">
-            {[
-              { value: "banners", label: "Banner Art" },
-              { value: "models", label: "2D Models" },
-              { value: "pfps", label: "PFP Art" },
-              { value: "references", label: "Reference Sheets" },
-            ].map((tab) => (
-              <TabsTrigger
-                key={tab.value}
-                value={tab.value}
-                className={`text-sm md:text-base px-4 py-2 rounded-xl border transition-all duration-300 whitespace-nowrap ${
-                  activeTab === tab.value
-                    ? "bg-primary text-primary-foreground border-primary shadow-md scale-105"
-                    : "bg-background/50 border-border hover:border-primary/40"
-                }`}
-              >
-                {tab.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          {/* Responsive Tabs List */}
+<TabsList className="flex flex-wrap justify-center gap-3 p-3 bg-card/50 backdrop-blur rounded-xl max-w-2xl mx-auto mb-6 sm:mb-8">
+  {[
+    { value: "banners", label: "Banner Art" },
+    { value: "models", label: "2D Models" },
+    { value: "pfps", label: "PFP Art" },
+    { value: "references", label: "Reference Sheets" },
+  ].map((tab) => (
+    <TabsTrigger
+      key={tab.value}
+      value={tab.value}
+      className={`text-sm md:text-base px-4 py-2 rounded-xl border transition-all duration-300 whitespace-nowrap ${
+        activeTab === tab.value
+          ? "bg-primary text-primary-foreground border-primary shadow-md scale-105"
+          : "bg-background/50 border-border hover:border-primary/40"
+      }`}
+    >
+      {tab.label}
+    </TabsTrigger>
+  ))}
+</TabsList>
+
 
         
 
