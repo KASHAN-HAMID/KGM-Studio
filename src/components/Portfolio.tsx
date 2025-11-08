@@ -97,7 +97,8 @@ const Portfolio = () => {
           onValueChange={(val) => setActiveTab(val)}
         >
           {/* Tabs List */}
-          <TabsList className="flex flex-wrap justify-center gap-3 p-3 sm:p-4 bg-card/50 backdrop-blur rounded-xl max-w-full mx-auto mb-6 sm:mb-8">
+         <TabsList className="flex justify-start sm:justify-center gap-3 p-3 sm:p-4 bg-card/50 backdrop-blur rounded-xl max-w-full mx-auto mb-6 sm:mb-8 overflow-x-auto whitespace-nowrap relative z-20">
+
             {[
               { value: "banners", label: "Banner Art" },
               { value: "models", label: "2D Models" },
