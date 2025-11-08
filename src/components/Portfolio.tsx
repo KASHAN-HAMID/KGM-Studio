@@ -44,11 +44,19 @@ const portfolioData = {
   ],
 };
 
+const categoryNames: Record<string, string> = {
+  banners: "Banner Art",
+  models: "2D Models",
+  pfps: "PFP Art",
+  references: "Reference Sheets",
+};
+
 const Portfolio = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<string>("banners");
 
   const PortfolioGrid = ({ items }: { items: typeof portfolioData.banners }) => (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
       {items.map((item, index) => (
         <Card
           key={item.id}
@@ -75,9 +83,10 @@ const Portfolio = () => {
 
   return (
     <section id="portfolio" className="py-24 px-4 relative">
-      <div className="absolute inset-0 opacity-20" style={{ background: 'var(--gradient-radial)' }} />
+      <div className="absolute inset-0 opacity-20" style={{ background: "var(--gradient-radial)" }} />
 
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
             Portfolio
@@ -88,14 +97,27 @@ const Portfolio = () => {
           </p>
         </div>
 
-        <Tabs defaultValue="banners" className="w-full">
-          <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-12 bg-card/50 backdrop-blur">
-            <TabsTrigger value="banners">Banner Art</TabsTrigger>
-            <TabsTrigger value="models">2D Models</TabsTrigger>
-            <TabsTrigger value="pfps">PFP Art</TabsTrigger>
-            <TabsTrigger value="references">Reference Sheets</TabsTrigger>
+        {/* Tabs Section */}
+        <Tabs defaultValue="banners" value={activeTab} onValueChange={setActiveTab} className="w-full">
+          {/* Tabs List */}
+          <TabsList className="flex flex-wrap justify-center gap-3 w-full max-w-2xl mx-auto mb-10 bg-card/50 backdrop-blur rounded-xl p-2">
+            <TabsTrigger value="banners" className="px-3 py-2 text-sm sm:text-base">Banner Art</TabsTrigger>
+            <TabsTrigger value="models" className="px-3 py-2 text-sm sm:text-base">2D Models</TabsTrigger>
+            <TabsTrigger value="pfps" className="px-3 py-2 text-sm sm:text-base">PFP Art</TabsTrigger>
+            <TabsTrigger value="references" className="px-3 py-2 text-sm sm:text-base">Reference Sheets</TabsTrigger>
           </TabsList>
 
+          {/* Current category label with gradient */}
+          <div className="text-center mb-10 animate-fade-in-up">
+            <p className="text-base sm:text-lg text-muted-foreground">
+              Currently viewing:{" "}
+              <span className="font-semibold bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent animate-gradient-x">
+                {categoryNames[activeTab]}
+              </span>
+            </p>
+          </div>
+
+          {/* Portfolio Grid per Category */}
           <TabsContent value="banners" className="mt-8">
             <PortfolioGrid items={portfolioData.banners} />
           </TabsContent>
