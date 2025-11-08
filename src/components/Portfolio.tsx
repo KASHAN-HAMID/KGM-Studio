@@ -107,9 +107,9 @@ const Portfolio = () => {
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className={`text-sm md:text-base px-4 py-2 sm:px-6 sm:py-3 rounded-xl border transition-all duration-500 whitespace-nowrap ${
+                className={`text-sm md:text-base px-4 py-2 sm:px-6 sm:py-3 rounded-xl border transition-all duration-300 whitespace-nowrap ${
                   activeTab === tab.value
-                    ? "bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-primary shadow-md scale-105 hover:animate-gradient"
+                    ? "bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent border-primary shadow-md scale-105"
                     : "bg-background/50 border-border hover:border-primary/40 text-muted-foreground"
                 }`}
               >
@@ -149,19 +149,6 @@ const Portfolio = () => {
           )}
         </DialogContent>
       </Dialog>
-
-      {/* Tailwind gradient animation */}
-      <style jsx>{`
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradientShift 4s ease infinite;
-        }
-      `}</style>
     </section>
   );
 };
