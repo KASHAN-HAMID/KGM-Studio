@@ -97,7 +97,10 @@ const Portfolio = () => {
           onValueChange={(val) => setActiveTab(val)}
         >
           {/* Tabs List */}
-<TabsList className="flex justify-start sm:justify-center gap-3 p-3 sm:p-4 bg-card/50 backdrop-blur rounded-xl max-w-full mx-auto mb-6 sm:mb-8 overflow-x-auto whitespace-nowrap relative z-20 scroll-smooth scrollbar-none">
+<TabsList
+  className="flex justify-start sm:justify-center gap-3 p-3 sm:p-4 bg-card/50 backdrop-blur rounded-xl max-w-full mx-auto mb-6 sm:mb-8 
+  overflow-x-auto sm:overflow-x-visible overflow-y-hidden whitespace-nowrap relative z-20 scroll-smooth scrollbar-none"
+>
 
             {[
               { value: "banners", label: "Banner Art" },
