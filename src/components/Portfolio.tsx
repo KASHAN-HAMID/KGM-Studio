@@ -49,7 +49,7 @@ const Portfolio = () => {
   const [activeTab, setActiveTab] = useState("banners");
 
   const PortfolioGrid = ({ items }: { items: typeof portfolioData.banners }) => (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 sm:mt-6">
       {items.map((item, index) => (
         <Card
           key={item.id}
@@ -96,46 +96,42 @@ const Portfolio = () => {
           className="w-full"
           onValueChange={(val) => setActiveTab(val)}
         >
-          {/* Responsive Tabs List */}
-          {/* Responsive Tabs List */}
-<TabsList className="flex flex-wrap justify-center gap-3 p-3 bg-card/50 backdrop-blur rounded-xl max-w-2xl mx-auto mb-6 sm:mb-8">
-  {[
-    { value: "banners", label: "Banner Art" },
-    { value: "models", label: "2D Models" },
-    { value: "pfps", label: "PFP Art" },
-    { value: "references", label: "Reference Sheets" },
-  ].map((tab) => (
-    <TabsTrigger
-      key={tab.value}
-      value={tab.value}
-      className={`text-sm md:text-base px-4 py-2 rounded-xl border transition-all duration-300 whitespace-nowrap ${
-        activeTab === tab.value
-          ? "bg-primary text-primary-foreground border-primary shadow-md scale-105"
-          : "bg-background/50 border-border hover:border-primary/40"
-      }`}
-    >
-      {tab.label}
-    </TabsTrigger>
-  ))}
-</TabsList>
-
-
-        
+          {/* Tabs List */}
+          <TabsList className="flex flex-wrap justify-center gap-3 p-3 sm:p-4 bg-card/50 backdrop-blur rounded-xl max-w-full mx-auto mb-6 sm:mb-8">
+            {[
+              { value: "banners", label: "Banner Art" },
+              { value: "models", label: "2D Models" },
+              { value: "pfps", label: "PFP Art" },
+              { value: "references", label: "Reference Sheets" },
+            ].map((tab) => (
+              <TabsTrigger
+                key={tab.value}
+                value={tab.value}
+                className={`text-sm md:text-base px-4 py-2 sm:px-6 sm:py-3 rounded-xl border transition-all duration-500 whitespace-nowrap ${
+                  activeTab === tab.value
+                    ? "bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-primary shadow-md scale-105 hover:animate-gradient"
+                    : "bg-background/50 border-border hover:border-primary/40 text-muted-foreground"
+                }`}
+              >
+                {tab.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
 
           {/* Portfolio Content */}
-          <TabsContent value="banners" className="mt-8">
+          <TabsContent value="banners" className="mt-6 sm:mt-8">
             <PortfolioGrid items={portfolioData.banners} />
           </TabsContent>
 
-          <TabsContent value="models" className="mt-8">
+          <TabsContent value="models" className="mt-6 sm:mt-8">
             <PortfolioGrid items={portfolioData.models} />
           </TabsContent>
 
-          <TabsContent value="pfps" className="mt-8">
+          <TabsContent value="pfps" className="mt-6 sm:mt-8">
             <PortfolioGrid items={portfolioData.pfps} />
           </TabsContent>
 
-          <TabsContent value="references" className="mt-8">
+          <TabsContent value="references" className="mt-6 sm:mt-8">
             <PortfolioGrid items={portfolioData.references} />
           </TabsContent>
         </Tabs>
@@ -153,6 +149,19 @@ const Portfolio = () => {
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Tailwind gradient animation */}
+      <style jsx>{`
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradientShift 4s ease infinite;
+        }
+      `}</style>
     </section>
   );
 };
